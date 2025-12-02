@@ -1,166 +1,1274 @@
+/* AdminDashboard.css - Complete CSS for Multi-Trip Income Tracking System */
+
 .admin-dashboard {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
 .dashboard-header {
-  background: white;
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.dashboard-header h1 {
-  color: #333;
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.user-info {
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 8px;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dashboard-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.theme-toggle-button {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.user-menu {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.user-info button {
-  width: auto;
-  padding: 0.5rem 1rem;
-  background: #dc3545;
+.user-greeting {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
 }
 
-.user-info button:hover {
-  background: #c82333;
+.logout-button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: var(--hover-bg);
 }
 
 .dashboard-nav {
-  background: white;
+  display: flex;
+  gap: 0.25rem;
   padding: 0 2rem;
-  border-bottom: 1px solid #dee2e6;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.dashboard-nav button {
-  width: auto;
-  background: none;
-  color: #666;
-  border: none;
+.nav-button {
   padding: 1rem 1.5rem;
-  border-bottom: 3px solid transparent;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
-.dashboard-nav button.active {
-  color: #667eea;
-  border-bottom-color: #667eea;
+.nav-button:hover {
+  color: var(--text-primary);
+  background: var(--hover-bg);
 }
 
-.dashboard-nav button:hover:not(.active) {
-  background: #f8f9fa;
-  color: #333;
+.nav-button.active {
+  color: var(--primary-color);
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary-color);
 }
 
 .dashboard-content {
   padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
-.section-header h2 {
-  color: #333;
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
 }
 
-.section-header button {
-  width: auto;
-  background: #28a745;
+.primary-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.section-header button:hover {
-  background: #218838;
+.primary-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-shadow);
+}
+
+.primary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  padding: 0.75rem 1.5rem;
+  background: var(--button-secondary-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondary-button:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.danger-button {
+  padding: 0.5rem 1rem;
+  background: var(--danger-bg);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-border);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.danger-button:hover:not(:disabled) {
+  background: var(--danger-hover-bg);
+}
+
+.danger-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.loading-state .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.table-container {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .data-table {
   width: 100%;
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.data-table th,
-.data-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-collapse: collapse;
 }
 
 .data-table th {
-  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  background: var(--table-header-bg);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
   font-weight: 600;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.btn-danger {
-  background: #dc3545;
-  width: auto;
-  padding: 0.5rem 1rem;
+.data-table td {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.95rem;
 }
 
-.btn-danger:hover {
-  background: #c82333;
+.data-table tr:last-child td {
+  border-bottom: none;
 }
 
-.modal {
+.data-table tr:hover {
+  background: var(--hover-bg);
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+.employee-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.employee-id {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-top: 0.25rem;
+}
+
+.role-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.role-badge.admin {
+  background: var(--success-bg);
+  color: var(--success-color);
+}
+
+.role-badge.employee {
+  background: var(--info-bg);
+  color: var(--info-color);
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.net-salary {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Modal Styles */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.5);
+  background: var(--modal-overlay);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
 }
 
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-}
-
-.modal-content h3 {
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-.modal-content input,
-.modal-content select {
+.modal {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
   width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
 }
 
-.form-actions {
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover:not(:disabled) {
+  color: var(--text-primary);
+  background: var(--hover-bg);
+}
+
+.modal-close:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-form {
+  padding: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .header-left {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .dashboard-nav {
+    padding: 0 1rem;
+  }
+  
+  .nav-button {
+    padding: 1rem;
+    font-size: 0.875rem;
+  }
+  
+  .dashboard-content {
+    padding: 1rem;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Action Buttons */
+.section-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-button {
+  padding: 0.5rem 1rem;
+  background: var(--info-bg);
+  color: var(--info-color);
+  border: 1px solid var(--info-color);
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover:not(:disabled) {
+  background: var(--info-color);
+  color: white;
+}
+
+.edit-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.preview-section {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+}
+
+.preview-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.preview-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ===== MULTI-TRIP INCOME TRACKING STYLES ===== */
+
+/* Employee Payroll Summary in Employee Table */
+.employee-payroll-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trip-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.count-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+.total-earnings {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.last-trip-date {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Payroll Container */
+.payroll-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.empty-payroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+}
+
+.empty-payroll h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.empty-payroll p {
+  color: var(--text-secondary);
+}
+
+/* Employee Payroll Card */
+.employee-payroll-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.employee-payroll-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-color);
+}
+
+.employee-payroll-header {
+  padding: 1.5rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.employee-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
 }
 
-.form-actions button {
-  width: auto;
-  flex: 1;
+.employee-header-name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.form-actions button:last-child {
-  background: #6c757d;
+.employee-avatar-small {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  font-weight: 600;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.form-actions button:last-child:hover {
-  background: #5a6268;
+.employee-header-name h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.employee-header-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.trip-count-badge {
+  background: var(--info-bg);
+  color: var(--info-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.total-earnings-badge {
+  background: var(--success-bg);
+  color: var(--success-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.employee-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.primary-button.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Employee Trips Table */
+.employee-trips-table {
+  overflow-x: auto;
+  padding: 0 1.5rem;
+}
+
+.trips-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.trips-table thead {
+  background: var(--header-bg);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.trips-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.trips-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  font-size: 0.875rem;
+}
+
+.trips-table tr:last-child td {
+  border-bottom: none;
+}
+
+.trips-table tr:hover {
+  background: var(--hover-bg);
+}
+
+/* Trip Date Styling */
+.trip-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Trip Badge Styling */
+.trip-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.trip-badge[data-trip-type="regular"] {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.trip-badge[data-trip-type="long_haul"] {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.trip-badge[data-trip-type="intercity"] {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.trip-badge[data-trip-type="local"] {
+  background: #e8f5e8;
+  color: #388e3c;
+}
+
+.trip-badge[data-trip-type="special"] {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.trip-badge[data-trip-type="corporate"] {
+  background: #e0f2f1;
+  color: #00796b;
+}
+
+/* Trip Description Cell */
+.trip-description-cell {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;
+  position: relative;
+  color: var(--text-secondary);
+}
+
+.trip-description-cell:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: normal;
+  width: 250px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Trip Earnings Column */
+.trip-earnings {
+  font-weight: 600;
+  color: var(--success-color);
+}
+
+/* Action Buttons in Trip Table */
+.action-buttons .edit-button.small,
+.action-buttons .danger-button.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Employee Payroll Summary Footer */
+.employee-payroll-summary-footer {
+  padding: 1.5rem;
+  background: var(--header-bg);
+  border-top: 1px solid var(--border-color);
+}
+
+.summary-totals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.total-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.total-item.grand-total {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--primary-light), var(--card-bg));
+  border: 2px solid var(--primary-color);
+}
+
+.total-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.total-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.total-value.grand-total-value {
+  font-size: 1.25rem;
+  color: var(--success-color);
+}
+
+/* ===== SIMPLIFIED PAYROLL FORM STYLES ===== */
+
+/* Salary Breakdown Section */
+.salary-breakdown-section {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-color);
+}
+
+.salary-breakdown-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.salary-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.salary-breakdown-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+.salary-breakdown-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.salary-breakdown-item label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.salary-breakdown-item input {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.salary-breakdown-item input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.salary-breakdown-item input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Total Calculation Simplified */
+.total-calculation {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.total-calculation .calculation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.total-calculation .calculation-row:last-child {
+  border-bottom: none;
+}
+
+.total-calculation .calculation-row.total-row {
+  border-top: 2px solid var(--border-color);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+}
+
+/* Section Divider */
+.section-divider {
+  margin: 1.5rem 0;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* New Trip Highlight Animation */
+@keyframes highlightNew {
+  0% { background-color: var(--success-bg); }
+  100% { background-color: transparent; }
+}
+
+.new-trip-highlight {
+  animation: highlightNew 2s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .trips-table th,
+  .trips-table td {
+    padding: 0.75rem;
+    font-size: 0.8125rem;
+  }
+  
+  .trip-description-cell {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-header-info {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .employee-header-name {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .employee-header-stats {
+    justify-content: center;
+  }
+  
+  .employee-header-actions {
+    justify-content: center;
+  }
+  
+  .employee-trips-table {
+    padding: 0 0.75rem;
+    margin: 0 -0.75rem;
+  }
+  
+  .trips-table th,
+  .trips-table td {
+    padding: 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .action-buttons button {
+    width: 100%;
+  }
+  
+  .summary-totals {
+    grid-template-columns: 1fr;
+  }
+  
+  .salary-breakdown-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .salary-breakdown-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.weekly-breakdown {
+  padding: 1.5rem;
+}
+
+.weekly-breakdown-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.week-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.week-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.week-label strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.week-range {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.week-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.week-trip-count {
+  background: var(--info-bg);
+  color: var(--info-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.week-net-pay {
+  background: var(--success-bg);
+  color: var(--success-color);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.week-trips-table {
+  overflow-x: auto;
+  padding: 0 1.5rem;
+}
+
+.week-totals-row {
+  background: var(--header-bg) !important;
+}
+
+.week-total-label {
+  text-align: right;
+  color: var(--text-primary);
+}
+
+.week-count-badge {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Enhanced employee header stats */
+.employee-header-stats {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Salary breakdown grid for simplified form */
+.salary-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.salary-breakdown-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.salary-breakdown-item label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.salary-breakdown-item input {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.salary-breakdown-item input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .week-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .week-stats {
+    justify-content: space-between;
+  }
+  
+  .week-trips-table {
+    padding: 0 0.75rem;
+  }
+  
+  .salary-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
 }

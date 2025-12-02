@@ -262,6 +262,107 @@ app.get('/api/employee/payroll', authenticateToken, async (req, res) => {
     }
 });
 
+// Admin: Update payroll record
+app.put('/api/admin/payroll/:id', authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        const { id } = req.params;
+        const { salaryAmount, payPeriod, deductions, bonuses } = req.body;
+        const netSalary = salaryAmount - deductions + bonuses;
+
+        const result = await pool.query(
+            `UPDATE payroll 
+             SET salary_amount = $1, pay_period = $2, deductions = $3, bonuses = $4, net_salary = $5 
+             WHERE id = $6 
+             RETURNING *`,
+            [salaryAmount, payPeriod, deductions, bonuses, netSalary, id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Payroll record not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Admin: Delete payroll record
+app.delete('/api/admin/payroll/:id', authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        const { id } = req.params;
+
+        const result = await pool.query('DELETE FROM payroll WHERE id = $1 RETURNING id', [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Payroll record not found' });
+        }
+
+        res.json({ message: 'Payroll record deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+// Admin: Update employee role
+app.put('/api/admin/employees/:id/role', authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        const { id } = req.params;
+        const { role } = req.body;
+
+        // Prevent changing own role
+        if (parseInt(id) === req.user.id) {
+            return res.status(400).json({ error: 'Cannot change your own role' });
+        }
+
+        const result = await pool.query(
+            'UPDATE employees SET role = $1 WHERE id = $2 RETURNING id, email, first_name, last_name, role',
+            [role, id]
+        );
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Employee not found' });
+        }
+
+        res.json(result.rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+});
+
+// Admin: Delete all payroll for specific employee (optional helper route)
+app.delete('/api/admin/payroll/employee/:employeeId', authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== 'admin') {
+            return res.status(403).json({ error: 'Access denied' });
+        }
+
+        const { employeeId } = req.params;
+
+        await pool.query('DELETE FROM payroll WHERE employee_id = $1', [employeeId]);
+
+        res.json({ message: 'Payroll records deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
 });

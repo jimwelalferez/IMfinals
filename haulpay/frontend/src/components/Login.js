@@ -33,7 +33,7 @@ const Login = () => {
         navigate('/employee');
       }
     } catch (error) {
-      setError('Invalid credentials');
+      setError('Invalid email or password. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -41,36 +41,71 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-form">
-        <h2>Haulpay Login</h2>
-        {error && <div className="error">{error}</div>}
-        <form onSubmit={handleSubmit}>
+      <div className="login-card">
+        <div className="login-header">
+          <div className="login-logo">
+            <div className="logo-icon">H</div>
+            <span className="logo-text">HAULPAY</span>
+          </div>
+          <h1 className="login-title">Sign In</h1>
+          <p className="login-subtitle">Enter your credentials to access your account</p>
+        </div>
+
+        {error && <div className="login-error">{error}</div>}
+
+        <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label>Email:</label>
+            <label htmlFor="email">Email Address</label>
             <input
+              id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              placeholder="name@company.com"
+              disabled={loading}
+              autoComplete="username"
             />
           </div>
+
           <div className="form-group">
-            <label>Password:</label>
+            <div className="password-label-container">
+              <label htmlFor="password">Password</label>
+              {/* <a href="#" className="forgot-password">Forgot password?</a> */}
+            </div>
             <input
+              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              placeholder="••••••••"
+              disabled={loading}
+              autoComplete="current-password"
             />
           </div>
-          <button type="submit" disabled={loading}>
-            {loading ? 'Logging in...' : 'Login'}
+
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? (
+              <div className="button-loading">
+                <div className="spinner"></div>
+                <span>Signing in...</span>
+              </div>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
-        <div className="demo-credentials">
-          <p><strong>Demo Admin:</strong> admin@haulpay.com / password</p>
-          <p><strong>Demo Employee:</strong> employee@company.com / password</p>
-        </div>
+
+        {/* <div className="login-footer">
+          <p className="signup-link">
+            Don't have an account? <a href="#">Contact administrator</a>
+          </p>
+        </div> */}
+      </div>
+
+      <div className="login-footer-note">
+        <p>© 2024 Haulpay Payroll System. All rights reserved.</p>
       </div>
     </div>
   );
