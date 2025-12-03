@@ -1,11 +1,12 @@
 {
-  "name": "backend",
+  "name": "haulpay-backend",
   "version": "1.0.0",
-  "description": "Haulpay Backend",
+  "description": "Haulpay Payroll System Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "build": "echo 'No build required for Node.js'",
     "vercel-build": "echo 'Building for Vercel...'"
   },
   "dependencies": {
@@ -16,7 +17,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1"
   },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "engines": {
-    "node": "18.x"
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
   }
 }
