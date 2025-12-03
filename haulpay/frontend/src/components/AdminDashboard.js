@@ -126,7 +126,7 @@ const AdminDashboard = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5000/api/admin/employees', {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/employee/payroll`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const filteredEmployees = response.data.filter(emp => 

@@ -105,7 +105,7 @@ const Login = () => {
       </div>
 
       <div className="login-footer-note">
-        <p>© 2024 Haulpay Payroll System. All rights reserved.</p>
+        <p>© 2025 Haulpay Payroll System. All rights reserved.</p>
       </div>
     </div>
   );
